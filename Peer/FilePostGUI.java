@@ -27,6 +27,8 @@ public class FilePostGUI extends JFrame implements ActionListener {
     private JButton resetButton;
 
     private String host;
+
+    public static final int PORT_NUMBER = 5500;
     public FilePostGUI(String host) {
         this.host = host;
         initUI();
@@ -93,7 +95,6 @@ public class FilePostGUI extends JFrame implements ActionListener {
                     while (addresses.hasMoreElements()) {
                         InetAddress address = addresses.nextElement();
                         if (!address.isLinkLocalAddress() && !address.isLoopbackAddress() && address.isSiteLocalAddress()) {
-                            System.out.println("Your private IP address is: " + address.getHostAddress());
                             ip = address.getHostAddress();
                         }
                     }
@@ -103,22 +104,18 @@ public class FilePostGUI extends JFrame implements ActionListener {
             }
             System.out.println(ip);
             String fileName = fileField.getText();
-            System.out.println("File posted: " + fileName);
-
             File f = new File(fileName);
             long fileSize = f.length();
             fileField.setText("");
 
-            System.out.format("The size of the file: %d bytes", fileSize);
 
             Object[] data = {ip, fileName, fileSize};
-
             System.out.println(data[0]);
             System.out.println(data[1]);
             System.out.println(data[2]);
 
             try {
-                Socket socket = new Socket(this.host, 5500);
+                Socket socket = new Socket(this.host, PORT_NUMBER);
                 ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
                 outputStream.writeObject(data);
             } catch (IOException ex) {

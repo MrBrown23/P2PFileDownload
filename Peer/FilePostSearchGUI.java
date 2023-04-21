@@ -26,6 +26,8 @@ public class FilePostSearchGUI extends JFrame implements ActionListener {
 
     String[] columnNames = {"ID", "IP Address", "File Name", "File size", "Download"};
 
+    public static final int PORT_NUMBER = 5500;
+
     public FilePostSearchGUI(String host) {
         this.host = host;
         setTitle("P2P JAVA");
@@ -140,7 +142,7 @@ public class FilePostSearchGUI extends JFrame implements ActionListener {
     private void create_connection(String message){
         try {
 
-            Socket clientSocket = new Socket(this.host,5500);
+            Socket clientSocket = new Socket(this.host,PORT_NUMBER);
             System.out.println("Client connected: " + clientSocket);
 
 

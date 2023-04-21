@@ -13,6 +13,8 @@ public class ButtonColumn extends AbstractCellEditor implements TableCellRendere
     int columnIndex;
     public static final int BUFFER_SIZE = 4096;
 
+    public static final int PORT_NUMBER = 1234;
+
     public ButtonColumn(JTable table,  JFrame frame) {
         button = new JButton("Download");
         button.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -38,7 +40,7 @@ public class ButtonColumn extends AbstractCellEditor implements TableCellRendere
     public Component getTableCellRendererComponent(JTable table, Object objValue, boolean isSelected, boolean hasFocus, int row, int column) {
         column = this.columnIndex;
         String ip = table.getModel().getValueAt(row, column).toString();
-        if (isUp(ip, 1234)) {
+        if (isUp(ip, PORT_NUMBER)) {
             button.setBackground(Color.GREEN);
             button.setEnabled(true);
         } else {
@@ -64,7 +66,7 @@ public class ButtonColumn extends AbstractCellEditor implements TableCellRendere
 
                     String host = table.getValueAt(row, 1).toString();
 
-                    Socket clientSocket = new Socket(host, 1234);
+                    Socket clientSocket = new Socket(host, PORT_NUMBER);
                     System.out.println("Connected to server.");
 
 
