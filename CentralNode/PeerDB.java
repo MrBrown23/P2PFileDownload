@@ -3,14 +3,14 @@ package CentralNode;
 import java.sql.*;
 
 public class PeerDB {
-    ResultSet resultSet;
+    private ResultSet resultSet;
 
-    Connection connection;
+    private Connection connection;
 
-    Statement statement;
+    private Statement statement;
 
     private static final String URL = "jdbc:mysql://localhost:3306/p2p";
-    public static final String USER = "root";
+    private static final String USER = "root";
 
     PeerDB(){
         try {
